@@ -1,0 +1,14 @@
+[
+  {
+    "keys": ["ctrl+g"],
+    "command": "prompt_goto_line",
+  },
+
+  {
+    "keys": ["tab"],
+    "command": "goto_line_complete",
+    "context": [
+      {"key": "search_panel_name", "operator": "regex_contains", "operand": "goto_line"}
+    ]
+  },
+]

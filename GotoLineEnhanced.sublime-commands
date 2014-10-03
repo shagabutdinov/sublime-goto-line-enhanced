@@ -1,0 +1,7 @@
+[
+  {
+    "caption": "GotoLineEnhanced: Prompt goto line",
+    "command": "prompt_goto_line",
+  },
+
+]
