@@ -74,7 +74,6 @@ This values hard-binded to plugin and can be changed only thorugh source-code.
 | Goto line              | tab                |                                    |
 
 
-### Todo
+### Dependencies
 
-- ctrl+s for "select to line" feature
-- ctrl+d for "delete to line" feature
+- https://github.com/shagabutdinov/sublime-quick-search-enhanced
