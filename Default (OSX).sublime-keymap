@@ -2,12 +2,16 @@
   {
     "keys": ["ctrl+g"],
     "command": "prompt_goto_line",
+    "context": [
+      {"key": "setting.sublime_enhanced_keybindings", "operator": "equal", "operand": true},
+    ]
   },
 
   {
     "keys": ["tab"],
     "command": "goto_line_complete",
     "context": [
+      {"key": "setting.sublime_enhanced_keybindings", "operator": "equal", "operand": true},
       {"key": "search_panel_name", "operator": "regex_contains", "operand": "goto_line"}
     ]
   },

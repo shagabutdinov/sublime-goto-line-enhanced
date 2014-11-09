@@ -5,7 +5,7 @@ Replacement for default sublime goto line.
 
 ### Demo
 
-![Demo](https://raw.github.com/shagabutdinov/sublime-goto-line-enhanced/master/demo/demo.gif "Demo")
+![Demo](https://github.com/shagabutdinov/sublime-enhanced-demos/raw/master/goto_line_enhanced.gif "Demo")
 
 
 ### WARNING
@@ -76,4 +76,4 @@ This values hard-binded to plugin and can be changed only thorugh source-code.
 
 ### Dependencies
 
-- https://github.com/shagabutdinov/sublime-quick-search-enhanced
+* [QuickSearchEnhanced](https://github.com/shagabutdinov/sublime-quick-search-enhanced)
