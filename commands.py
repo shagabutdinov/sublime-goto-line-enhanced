@@ -47,7 +47,15 @@ def get_panel():
 
   return panel
 
-def convert_query_to_point(view, query, left = False):
+def shift(view, point):
+  string = view.substr(view.line(point))
+  shift_match = re.search(r'(?<!\n)(\S|$)', string)
+  if shift_match != None:
+    point += shift_match.start(1)
+
+  return point
+
+def convert_query_to_point(view, query, options = {}):
   if re.match(r'\d+', query) == None:
     return
 
@@ -58,33 +66,42 @@ def convert_query_to_point(view, query, left = False):
     line = max_line
 
   point = view.text_point(line, 0)
-  string = view.substr(view.line(point))
 
-  if left:
+  if 'position' in options and options['position'] == 'end':
     point = view.line(point).b
   else:
-    shift_match = re.search(r'(?<!\n)(\S|$)', string)
-    if shift_match != None:
-      point += shift_match.start(1)
+    point = shift(view, point)
 
   return point
 
-def convert_query_to_region(view, query):
-  start = end = convert_query_to_point(view, query)
+def convert_query_to_region(view, query, options = {}):
+  start = end = convert_query_to_point(view, query, options)
 
   if start == None or end == None:
     return None
 
+  if 'select' in options and options['select']:
+    start = view.sel()[0].begin()
+    if 'position' not in options or options['position'] == None:
+      if end > start:
+        end = view.line(end).b
+      else:
+        end = shift(view, view.line(end).a)
+
   return sublime.Region(start, end)
 
 class GotoLineComplete(sublime_plugin.TextCommand):
-  def run(self, edit):
+  def run(self, edit, position = None, select = False):
     panel = get_panel()
     if panel == None:
       return
 
     view, query = panel.get_opener(), panel.get_current_text()
-    region = convert_query_to_region(view, query)
+    region = convert_query_to_region(view, query, {
+      'position': position,
+      'select': select,
+    })
+
     view.sel().clear()
     view.sel().add(region)
     panel.close(None, False)
