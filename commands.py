@@ -4,12 +4,11 @@ import re
 
 try:
   from QuickSearchEnhanced.quick_search import panels
-except ImportError:
+except ImportError as error:
   sublime.error_message("Dependency import failed; please read readme for " +
    "GotoLineEnhanced plugin for installation instructions; to disable this " +
-   "message remove this plugin")
-
-
+   "message remove this plugin; message: " + str(error))
+  raise error
 
 class PromptGotoLine(sublime_plugin.TextCommand):
   def run(self, edit, start_with_current = False):
